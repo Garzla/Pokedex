@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-ene-2015 11:14:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="models.Habilidad" table="habilidad" catalog="pokemon">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="20" />
+        </property>
+        <set name="pokemons" table="pokemon" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="habilidad_oculta" />
+            </key>
+            <one-to-many class="models.Pokemon" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-ene-2015 11:14:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="models.Pokemon" table="pokemon" catalog="pokemon">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="entrenador" class="models.Entrenador" fetch="select">
+            <column name="id_entrenador" />
+        </many-to-one>
+        <many-to-one name="habilidad" class="models.Habilidad" fetch="select">
+            <column name="habilidad_oculta" />
+        </many-to-one>
+        <many-to-one name="pokedex" class="models.Pokedex" fetch="select">
+            <column name="id_pokemon" />
+        </many-to-one>
+        <property name="nivel" type="java.lang.Integer">
+            <column name="nivel" />
+        </property>
+        <property name="mote" type="string">
+            <column name="mote" length="20" />
+        </property>
+        <set name="movimientos" table="movimiento_pokemon" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_pokemon" not-null="true" />
+            </key>
+            <many-to-many entity-name="models.Movimiento">
+                <column name="id_movimiento" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
